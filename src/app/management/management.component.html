@@ -1,0 +1,48 @@
+<div class="panel panel-primary" *ngIf="currentUser">
+  <div class="panel-heading">
+    <h3 class="panel-title">Administración de usuarios y perfiles</h3>
+  </div>
+  <div class="panel-body">
+    <div class="form-group">
+      <label for="Perfil"><i>Perfil</i></label>
+      <select id="Perfil" name="Perfil" class="form-control" [(ngModel)]="currentUser.profile" (change)='listProfile($event)'>
+        <option value="">--Seleccione--</option>
+        <option *ngFor="let perfil of roles">
+          {{perfil.Nombre}}
+        </option>
+      </select>      
+    </div>
+
+    <div class="form-group">
+      <label for="Usuarios">Usuarios</label>
+      <select id="Usuarios" name="Usuarios" class="form-control" (change)='appendUser($event)'>
+        <option value="">--Seleccione--</option>
+        <option *ngFor="let user of users">
+          {{user.Nombre}}
+        </option>
+      </select>
+      <div>
+        <ul *ngFor="let user of groupUsers">
+            <li><i>{{user.Nombre}}</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="accesos"><i>Plantilla de accesos</i></label>
+      <label for="canCreateAircraft">Editar aeronave</label>
+      <input type="checkbox" name="canCreateAircraft" id="canCreateAircraft" [(ngModel)]="currentUser.settings.canCreateAircraft">
+      <label for="canRentAircraft">Editar viajes</label>
+      <input type="checkbox" name="canRentAircraft" id="canRentAircraft" [(ngModel)]="currentUser.settings.canRentAircraft">
+      <label for="canAddPassengers">Editar pasajeros</label>
+      <input type="checkbox" name="canAddPassengers" id="canAddPassengers" [(ngModel)]="currentUser.settings.canAddPassengers">
+      <label for="management">Administración de perfiles</label>
+      <input type="checkbox" name="management" id="management" [(ngModel)]="currentUser.settings.management">
+    </div>
+
+  </div> 
+  <div class="panel-footer">
+    <button class="btn btn-primary" (click)="saveData()" ptcDisplaycontrol >Guardar</button>
+    <button class="btn btn-default" (click)="cancel()">Cancelar</button>
+  </div>
+</div>

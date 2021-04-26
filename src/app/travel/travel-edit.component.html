@@ -1,0 +1,56 @@
+<div class="panel panel-primary" *ngIf="travel">
+  <div class="panel-heading">
+    <h3 class="panel-title">Datos de viaje</h3>
+  </div>
+  <div class="panel-body">
+    <div class="form-group">
+      <label for="Ubicacion">Ubicacion</label>
+      <input id="Ubicacion" class="form-control" [(ngModel)]="travel.Ubicacion" />
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="Salida">Fecha de salida</label>
+        <input id="Salida" class="form-control" [ngModel]="travel.Salida | date:'yyyy-MM-dd'" 
+        (ngModelChange)="travel.Salida = $event"
+        type="date" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Llegada">Fecha de llegada</label>
+      <input id="Llegada" class="form-control" [ngModel]="travel.Llegada | date:'yyyy-MM-dd'" 
+      (ngModelChange)="travel.Llegada = $event"
+      type="date" />
+    </div>
+
+    <div class="form-group">
+      <label for="Aeronave">Aeronave</label>
+      <select id="aeronaves" name="aeronave" class="form-control" [(ngModel)]="travel.Aeronave">
+        <option value="">--Seleccione--</option>
+        <option *ngFor="let aeronave of aeronaves">
+          {{aeronave.Codigo_registro}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="Pasajeros">Pasajeros</label>
+      <select id="pasajeros" name="pasajeros" class="form-control" (change)='appendPassenger($event)'>
+        <option value="">--Seleccione--</option>
+        <option *ngFor="let pasajero of listPasajeros">
+          {{pasajero.Nombre}}
+        </option>
+      </select>
+      <div>
+        <ul *ngFor="let pasajero of travel.Pasajeros">
+            <li><i>{{pasajero.Nombre}}</i></li>
+        </ul>
+      </div>
+    </div>
+  </div> 
+  <div class="panel-footer">
+    <button class="btn btn-primary" (click)="saveData()" *ngIf="securityObject.settings.canRentAircraft">Guardar</button>
+    <button class="btn btn-default" (click)="cancel()">Cancelar</button>
+  </div>
+</div>

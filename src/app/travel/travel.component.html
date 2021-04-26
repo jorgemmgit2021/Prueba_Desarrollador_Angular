@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Listado de viajes</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary" (click)="addTravel()" *ngIf="securityObject.settings.canRentAircraft">Nuevo</button>
+  </div>
+</div>
+
+<div class="table-responsive" *ngIf="travelList && travelList.length">
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Opciones</th>
+        <th>Ubicacion</th>
+        <th>Salida</th>
+        <th>Llegada</th>
+        <th>Aeronave</th>
+        <th class="text-right">Pasajeros</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let travel of travelList">
+        <td>
+          <a href="#" class="btn btn-primary" [routerLink]="['/travelEdit', travel.Aeronave]">Editar</a>
+        </td>
+        <td>{{travel.Ubicacion}}</td>
+        <td>{{travel.Salida|date}}</td>
+        <td>{{travel.Llegada|date}}</td>
+        <td>{{travel.Aeronave}}</td>
+        <td>
+          <div>
+            <ul *ngFor="let pasajero of travel.Pasajeros">
+                <li><i>{{pasajero.Nombre}}</i></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

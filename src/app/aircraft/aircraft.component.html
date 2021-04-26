@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Listado de aeronaves</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary" (click)="addAircraft()" *ngIf="securityObject.settings.canCreateAircraft">Nuevo</button>
+  </div>
+</div>
+
+<div class="table-responsive" *ngIf="AircraftList && AircraftList.length">
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Opciones</th>
+        <th>Codigo de registro</th>
+        <th>Descripcion</th>
+        <th class="text-right">Piloto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Aircraft of AircraftList">
+        <td>
+          <a href="#" class="btn btn-primary" [routerLink]="['/aircraftEdit', Aircraft.Codigo_registro]">Editar
+          </a>
+        </td>
+        <td>{{Aircraft.Codigo_registro}}</td>
+        <td>{{Aircraft.Descripcion}}</td>
+        <td class="text-right">{{Aircraft.Piloto}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
